@@ -29,4 +29,8 @@ export class UserService {
     getAllUsers = () => {
         return this.db
     } 
+
+    deleteUser = () => {
+        console.log('Deletando...')
+    }
 }
