@@ -13,19 +13,16 @@ export class UserController {
         const user = request.body
 
         // nulo ou indefinido
-        if(!user.name){
-            return response.status(400).json({ message: 'Bad Request: name must be defined'})
+        if(!user.name || !user.email || !user.password){
+            return response.status(400).json({ message: 'Bad Request: name, email and password must be defined'})
         }
-        if (!user.email){
-            return response.status(400).json({ message: 'Bad Request: email must be defined'})
-        }
-        this.userService.createUser(user.name, user.email)
+
+        this.userService.createUser(user.name, user.email, user.password)
         return response.status(201).json({ message: 'Created' })
     }
 
-    getAllUsers = (request: Request, response: Response) => {
-        const users = this.userService.getAllUsers()
-        return response.status(200).json(users)
+    getUser = (request: Request, response: Response) => {
+        return response.status(200)
     } 
 
     deleteUser = (request: Request, response: Response) => {
